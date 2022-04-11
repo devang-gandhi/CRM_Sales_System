@@ -1,0 +1,109 @@
+[
+    {
+        "id": 1,
+        "CreateDate":"30-03-2022",
+        "EnquiryNo":3685494651,
+        "CustomerName":"J.J.Bose",
+        "Enquiry":"---",
+        "Amount":55000,
+        "AssignedTo":"Robot",
+        "Status":"Customer response pending",
+        "History":[
+            {
+                "Date":"31-March-2022",
+                "Message":"Sales downwards",
+                "MessageBy": "Customer1"
+            },
+            {
+                "Date":"31-March-2022",
+                "Message":"Sales upwards",
+                "MessageBy": "Customer2"
+            },
+            {
+                "Date":"31-March-2022",
+                "Message":"Issue with departments",
+                "MessageBy": "Operator"
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "CreateDate":"30-03-2022",
+        "EnquiryNo":3685494651,
+        "CustomerName":"Stacy",
+        "Enquiry":"---",
+        "Amount":55000,
+        "AssignedTo":"Robot",
+        "Status":"Customer response pending"
+    },
+    {
+        "id": 3,
+        "CreateDate":"30-03-2022",
+        "EnquiryNo":3685494651,
+        "CustomerName":"Alice",
+        "Enquiry":"---",
+        "Amount":55000,
+        "AssignedTo":"Robot",
+        "Status":"Customer response pending"
+    },
+    {
+        "id": 4,
+        "CreateDate":"30-03-2022",
+        "EnquiryNo":3685494651,
+        "CustomerName":"Nicole",
+        "Enquiry":"---",
+        "Amount":55000,
+        "AssignedTo":"Robot",
+        "Status":"Customer response pending"
+    },
+    {
+        "id": 5,
+        "CreateDate":"30-03-2022",
+        "EnquiryNo":3685494651,
+        "CustomerName":"Trish",
+        "Enquiry":"---",
+        "Amount":55000,
+        "AssignedTo":"Robot",
+        "Status":"Customer response pending"
+    },    
+    {
+        "id": 6,
+        "CreateDate":"30-03-2022",
+        "EnquiryNo":3685494651,
+        "CustomerName":"Lita",
+        "Enquiry":"---",
+        "Amount":55000,
+        "AssignedTo":"Robot",
+        "Status":"Customer response pending"
+    },    
+    {
+        "id": 7,
+        "CreateDate":"30-03-2022",
+        "EnquiryNo":3685494651,
+        "CustomerName":"Torrie",
+        "Enquiry":"---",
+        "Amount":55000,
+        "AssignedTo":"Robot",
+        "Status":"Customer response pending"
+    },    
+    {
+        "id": 8,
+        "CreateDate":"30-03-2022",
+        "EnquiryNo":3685494651,
+        "CustomerName":"Alexa",
+        "Enquiry":"---",
+        "Amount":55000,
+        "AssignedTo":"Robot",
+        "Status":"Customer response pending"
+    },    
+    {
+        "id": 9,
+        "CreateDate":"30-03-2022",
+        "EnquiryNo":3685494651,
+        "CustomerName":"Bianca",
+        "Enquiry":"---",
+        "Amount":55000,
+        "AssignedTo":"Robot",
+        "Status":"Customer response pending"
+    }
+]
