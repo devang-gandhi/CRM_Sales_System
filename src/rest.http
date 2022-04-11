@@ -1,0 +1,47 @@
+###user sign up
+POST http://localhost:3001/user
+Content-Type: application/json
+
+{
+    "name":"Devang",
+    "company":"InfoQuit",
+    "address":"",
+    "phone":"6767895421",
+    "email":"def@email.com",
+    "password":"abc-1234"
+} 
+
+###user sign in
+POST http://localhost:3001/user/login
+Content-Type: application/json
+
+{
+    "email":"def@email.com",
+    "password":"password12"
+} 
+
+###get user profile
+GET http://localhost:3001/user
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRlZkBlbWFpbC5jb20iLCJpYXQiOjE2NDk2NjQwNDksImV4cCI6MTY0OTY2NDY0OX0.4Sdt3qMYQcjCX_MQszKOhfFr_sc6Ol6y9BpJWv1M-Bg
+
+###password reset
+POST http://localhost:3001/user/reset-password
+Content-Type: application/json
+
+{
+    "email":"def@email.com"
+}
+
+###update new password in db
+PATCH http://localhost:3001/user/reset-password
+Content-Type: application/json
+
+{
+    "email":"def@email.com",
+    "pin": 253758,
+    "newpassword":"password12"
+}
+
+###user logout
+DELETE http://localhost:3001/user/logout
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRlZkBlbWFpbC5jb20iLCJpYXQiOjE2NDkyMjM2MjcsImV4cCI6MTY0OTIyNDIyN30.vIL29H1wkcVksSlD6Qx8Ok_BQcI18o8eU3pQkq_zuQ4
