@@ -5,7 +5,7 @@ import { LinkContainer } from 'react-router-bootstrap'
 const Breadcrum = ({page}) => {
   return (
     <Breadcrumb>
-      <LinkContainer to="/">
+      <LinkContainer to="/dashboard">
         <Breadcrumb.Item>Home</Breadcrumb.Item>
       </LinkContainer>
         <Breadcrumb.Item active>{page}</Breadcrumb.Item>

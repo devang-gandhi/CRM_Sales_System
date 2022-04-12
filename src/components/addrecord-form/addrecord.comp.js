@@ -3,6 +3,7 @@ import {Form, Button, Alert, Spinner} from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import './addrecord.comp.css'
 import { openNewRecord } from './addRecordAction'
+import { resetSuccessMsg } from './addRecordSlicer'
 // import PropTypes from 'prop-types' 
 
 const intialfrmdata = {
@@ -18,7 +19,12 @@ export const AddrecordForm = () => {
     const {isLoading, error, successMsg} = useSelector(state => state.openRecord);
     const [frmdata, setfrmdata] = useState(intialfrmdata);
 
-    useEffect(() => { }, [frmdata])
+    useEffect(() => {
+        return ()=>{
+            successMsg && dispatch(resetSuccessMsg())
+        }
+    }, [dispatch,frmdata]);
+
     const handleon = (e) =>{
         const {name, value} = e.target;
         setfrmdata({

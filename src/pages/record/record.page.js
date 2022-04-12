@@ -6,6 +6,7 @@ import { Updaterecord } from '../../components/update-record/updaterecord.comp';
 import {useParams, Link} from 'react-router-dom'
 import { closeRecord, fetchSingleRecord } from '../record-listing/recordAction';
 import { useDispatch, useSelector } from 'react-redux';
+import { resetMsg } from '../record-listing/recordSlice';
 
 export const Record = () => {
 
@@ -16,7 +17,11 @@ export const Record = () => {
 
     useEffect(() => {
         dispatch(fetchSingleRecord(rId))
-    } , [ rId, dispatch]);
+
+        return ()=>{
+            (replyMsg || replyRecordError) && dispatch(resetMsg())
+        }
+    } , [ rId, dispatch, replyMsg, replyRecordError]);
 
   return (
     <Container>

@@ -88,6 +88,12 @@ export const LoginForm = ({ frmswitch}) => {
                 <a href="#!" onClick={() =>frmswitch('reset')} >Forgot Password?</a>
             </Col>
         </Row>
+
+        <Row className='py-3'>
+            <Col>
+              If you are new here? <a href="/registration" >Register Now!</a>
+            </Col>
+        </Row>
     </Container>
   )
 };

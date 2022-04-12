@@ -21,9 +21,13 @@ const newRecordSlice = createSlice({
             state.isLoading= true;
             state.error = payload;
         },
+        resetSuccessMsg: (state)=>{
+            state.isLoading= true;
+            state.successMsg= '';
+        },
     },
 });
 
-export const {openNewRecordPending, openNewRecordSuccess, openNewRecordFail} = newRecordSlice.actions
+export const {openNewRecordPending, openNewRecordSuccess, openNewRecordFail, resetSuccessMsg} = newRecordSlice.actions
 
 export default newRecordSlice.reducer

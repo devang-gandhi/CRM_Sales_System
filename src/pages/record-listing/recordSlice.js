@@ -68,10 +68,15 @@ const recordListSlice = createSlice({
             state.isLoading = false;
             state.error =  payload;
         },
+        resetMsg: (state) =>{
+            state.isLoading = false;
+            state.replyRecordError='';
+            state.replyMsg='';
+        },
     }
 })
 
 const {reducer, actions} = recordListSlice;
-export const {fetchRecordLoading, fetchRecordSuccess, fetchRecordFail, searchRecords, fetchSingleRecordFail,fetchSingleRecordLoading,fetchSingleRecordSuccess, replyRecordFail, replyRecordLoading, replyRecordSuccess, closeRecordLoading, closeRecordSuccess, closeRecordFail} = actions
+export const {fetchRecordLoading, fetchRecordSuccess, fetchRecordFail, searchRecords, fetchSingleRecordFail,fetchSingleRecordLoading,fetchSingleRecordSuccess, replyRecordFail, replyRecordLoading, replyRecordSuccess, closeRecordLoading, closeRecordSuccess, closeRecordFail, resetMsg} = actions
 
 export default reducer
