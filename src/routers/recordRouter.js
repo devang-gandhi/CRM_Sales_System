@@ -12,7 +12,7 @@ router.all('/', (req,res,next) =>{
 //create new record
 router.post('/', createRecordValidation, authorization , async(req,res)=>{
     try {
-        const {enquiryno, customername, enquiry, amount, assignedto,message, messageby}=req.body;
+        const {enquiryno, customername, enquiry, amount, assignedto}=req.body;
 
         const uid = req.userID;
 
@@ -23,12 +23,6 @@ router.post('/', createRecordValidation, authorization , async(req,res)=>{
             enquiry,
             amount,
             assignedto,
-            history:[
-                {
-                    message,
-                    messageby
-                }
-            ]
         }
         const result = await insertRecord(recordObj);
         console.log(result);

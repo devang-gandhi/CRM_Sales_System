@@ -8,8 +8,8 @@ const customername = Joi.string().min(2).required();
 const enquiry = Joi.string().max(20).required();
 const amount = Joi.number().min(1).max(9999999999).required();
 const assignedto = Joi.string().min(2).required();
-const message = Joi.string().max(1000).required();
-const messageby = Joi.string().max(20).required();
+const message = Joi.string().max(1000);
+const messageby = Joi.string().max(20);
 
 
 const resetpasspin = (req,res,next)=>{
@@ -41,8 +41,6 @@ const createRecordValidation = (req,res,next)=>{
         enquiry,
         amount,
         assignedto,
-        message,
-        messageby,
     });
     const value = schema.validate(req.body);
     if(value.error){
