@@ -14,9 +14,9 @@ export const LoginForm = ({ frmswitch}) => {
     const redirect = useNavigate();
     const {isLoading, isAuth, error} = useSelector(state=> state.login);
 
-    useEffect(()=>{
-      sessionStorage.getItem('accessJWT') && redirect('/dashboard')
-    },[redirect]);
+    // useEffect(()=>{
+    //   sessionStorage.getItem('accessJWT') && redirect('/dashboard')
+    // },[redirect]);
 
     const [email, setemail] = useState('def@email.com')
     const [password, setpassword] = useState('password12')

@@ -1,12 +1,22 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {Container, Row, Col, Button} from 'react-bootstrap'
 import Recordtable  from '../../components/record-table/recordtable.comp'
-import records from '../../assets/data/records.json'
 import  Breadcrum  from '../../components/breadcrum/breadcrum.comp'
-import {Link, useNavigate} from 'react-router-dom';
+import {Link} from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchAllRecords } from '../record-listing/recordAction';
+
 
 
 export const Dashboard = () => {
+    const dispatch = useDispatch();
+    const {records} = useSelector(state => state.records);
+
+    useEffect(() => {
+        dispatch(fetchAllRecords());
+    }, [dispatch]);
+
+
   return (
     <Container>
         <Row>
@@ -25,8 +35,8 @@ export const Dashboard = () => {
 
         <Row>
             <Col className='text-center mb-2'>
-                <div>Total sales records: 50</div>
-                <div>Pending records: 5</div>
+                <div>Total sales records: {records.length} </div>
+                {/* <div>Pending records: {records.filter(row=> row.status === 'Closed')} </div> */}
             </Col>
         </Row>
 
@@ -40,7 +50,7 @@ export const Dashboard = () => {
 
         <Row>
             <Col className='recent-record'>
-                <Recordtable records={records}/> 
+                <Recordtable/> 
             </Col>
         </Row>
     </Container>

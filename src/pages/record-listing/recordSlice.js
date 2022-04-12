@@ -4,7 +4,10 @@ const initialState = {
     records:[],
     isLoading: false,
     error:'',
-    searchRecordList:[]
+    replyRecordError:'',
+    replyMsg:'',
+    searchRecordList:[],
+    selectedRecord: {}
 }
 const recordListSlice = createSlice({
     name: 'recordList',
@@ -28,11 +31,47 @@ const recordListSlice = createSlice({
 
                 return row.customername.toLowerCase().includes(payload.toLowerCase());
             })
-        }
+        },
+        fetchSingleRecordLoading: (state) =>{
+            state.isLoading =  true;
+        },
+        fetchSingleRecordSuccess: (state,{payload} ) =>{
+            state.selectedRecord = payload;
+            state.isLoading = false;
+            state.error =  '';
+        },
+        fetchSingleRecordFail: (state, {payload}) =>{
+            state.isLoading = false;
+            state.error =  payload;
+        },
+        replyRecordLoading: (state) =>{
+            state.isLoading =  true;
+        },
+        replyRecordSuccess: (state, {payload}) =>{
+            state.isLoading = false;
+            state.error =  '';
+            state.replyMsg = payload;
+        },
+        replyRecordFail: (state, {payload}) =>{
+            state.isLoading = false;
+            state.replyRecordError =  payload;
+        },
+        closeRecordLoading: (state) =>{
+            state.isLoading =  true;
+        },
+        closeRecordSuccess: (state, {payload}) =>{
+            state.isLoading = false;
+            state.error =  '';
+            state.replyMsg = payload;
+        },
+        closeRecordFail: (state, {payload}) =>{
+            state.isLoading = false;
+            state.error =  payload;
+        },
     }
 })
 
 const {reducer, actions} = recordListSlice;
-export const {fetchRecordLoading, fetchRecordSuccess, fetchRecordFail, searchRecords} = actions
+export const {fetchRecordLoading, fetchRecordSuccess, fetchRecordFail, searchRecords, fetchSingleRecordFail,fetchSingleRecordLoading,fetchSingleRecordSuccess, replyRecordFail, replyRecordLoading, replyRecordSuccess, closeRecordLoading, closeRecordSuccess, closeRecordFail} = actions
 
 export default reducer

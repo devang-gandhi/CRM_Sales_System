@@ -1,38 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import {Container, Row, Col} from 'react-bootstrap'
 import { AddrecordForm } from '../../components/addrecord-form/addrecord.comp'
 import Breadcrum from '../../components/breadcrum/breadcrum.comp'
 
-const intialfrmdata = {
-    createdate: "",
-    enquiryno: "",
-    customername: "",
-    details:"",
-    amount:"",
-    assignedto:""
-}
+
 
 export const Addrecord = () => {
-
-    const [frmdata, setfrmdata] = useState(intialfrmdata);
-    useEffect(() => { }, [frmdata])
-
-    const handleon = (e) =>{
-        const {name, value} = e.target;
-
-      
-        
-
-        setfrmdata({
-            ...frmdata,
-            [name]: value,
-        })
-    }
-
-    const submiton = e =>{
-        e.preventDefault()
-        console.log('form requested', frmdata);
-    }
 
   return (
     <Container>
@@ -47,7 +20,7 @@ export const Addrecord = () => {
         </Row>
         <Row>
             <Col>
-                <AddrecordForm submiton={submiton} handleon={handleon} frmdata={frmdata}></AddrecordForm>
+                <AddrecordForm ></AddrecordForm>
             </Col>
         </Row>
     </Container>

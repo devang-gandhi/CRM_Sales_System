@@ -29,12 +29,12 @@ const Recordtable = () => {
         {searchRecordList.length ? (searchRecordList.map((row)=>
                   <tr key={row._id}>
                   <td><Link to={`/record/${row._id}`}>{row._id}</Link></td>
-                  <td>{row.createdate}</td>
+                  <td>{row.createdate && new Date(row.createdate).toLocaleString()}</td>
                   <td>{row.enquiryno}</td>
                   <td>{row.customername}</td>
                   <td>{row.enquiry}</td>
                   <td>{row.amount}</td>
-                  <td>{row.assignedTo}</td>
+                  <td>{row.assignedto}</td>
                   <td>{row.status}</td>  
                 </tr>)) :
                 <tr>

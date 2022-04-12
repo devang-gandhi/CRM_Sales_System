@@ -1,36 +1,23 @@
 import React, { useState, useEffect } from 'react'
-import {Container, Row, Col, Button} from 'react-bootstrap'
+import {Container, Row, Col, Button, Spinner, Alert} from 'react-bootstrap'
 import Breadcrum from '../../components/breadcrum/breadcrum.comp'
-import records from '../../assets/data/records.json'
 import { Conversation } from '../../components/conversation/conversation.comp';
 import { Updaterecord } from '../../components/update-record/updaterecord.comp';
 import {useParams, Link} from 'react-router-dom'
+import { closeRecord, fetchSingleRecord } from '../record-listing/recordAction';
+import { useDispatch, useSelector } from 'react-redux';
 
 export const Record = () => {
 
     const {rId} = useParams()
-    const [message, setmessage] = useState('')
-    const [record, setrecord] = useState({})
-    console.log(record);
-    useEffect(() => {
-            for (let i = 0; i < records.length; i++) {
-            if(records[i].id.toString() === rId){
-                setrecord(records[i])
-                break
-            }
-        }
-    } , [message, rId])
-
+    const dispatch = useDispatch();
+    const {isLoading, error, selectedRecord, replyRecordError ,replyMsg} = useSelector(state => state.records)
     
 
-    const handleon = e =>{
-        setmessage(e.target.value);
-    }
+    useEffect(() => {
+        dispatch(fetchSingleRecord(rId))
+    } , [ rId, dispatch]);
 
-    const submiton= () => {
-        alert('Form submited!');
-    }
-    console.log(useParams());
   return (
     <Container>
         <Row>
@@ -39,29 +26,35 @@ export const Record = () => {
             </Col>
         </Row>
         <Row>
+            <Col>
+                {isLoading && <Spinner variant='primary' animation='border'/>}
+                {error && <Alert variant='danger'>{error}</Alert>}
+                {replyRecordError && <Alert variant='danger'>{replyRecordError}</Alert>}
+                {replyMsg && <Alert variant='success'>{replyMsg}</Alert>}
+            </Col>
+        </Row>
+        <Row>
             <Col className='font-weight-bolder text-secondary'>
-                <div className="createdate">CreateDate :{record.CreateDate}</div>
-                <div className="enquiryno">EnquiryNo :{record.EnquiryNo}</div>
-                <div className="customername">CustomerName: {record.CustomerName}</div>
-                <div className="enquiry">Enquiry: {record.Enquiry}</div>
-                <div className="amount">Amount: {record.Amount}</div>
-                <div className="assignedto">AssignedTo: {record.AssignedTo}</div>
-                <div className="status">Status: {record.Status}</div>
+                <div className="createdate">CreateDate :{selectedRecord.createdate && new Date(selectedRecord.createdate).toLocaleString()}</div>
+                <div className="enquiryno">EnquiryNo :{selectedRecord.enquiryno}</div>
+                <div className="customername">CustomerName: {selectedRecord.customername}</div>
+                <div className="enquiry">Enquiry: {selectedRecord.enquiry}</div>
+                <div className="amount">Amount: {selectedRecord.amount}</div>
+                <div className="assignedto">AssignedTo: {selectedRecord.assignedto}</div>
+                <div className="status">Status: {selectedRecord.status}</div>
             </Col>
             <Col >
-                <Link to='/recordlist'>
-                    <Button variant='outline-primary' style={{'marginLeft':'410px'}}>Close Record</Button>
-                </Link>
+                <Button variant='outline-primary' style={{'marginLeft':'410px'}} onClick={()=>dispatch(closeRecord(rId))} disabled={selectedRecord.status==='Closed'}>Close Record</Button>
             </Col>
         </Row>
         <Row className='mt-4'>
             <Col>
-                {record.History && <Conversation msg={record.History}/>}
+                {selectedRecord.history && <Conversation msg={selectedRecord.history}/>}
             </Col>
         </Row>
         <Row className='mt-4'>
             <Col>
-                <Updaterecord msg={message} handleon={handleon} submiton={submiton}/>
+                <Updaterecord _id={rId}/>
             </Col>
         </Row>
 
