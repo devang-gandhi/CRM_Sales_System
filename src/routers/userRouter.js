@@ -127,9 +127,10 @@ router.post('/reset-password', resetpasspin, async (req,res)=>{
 
         return res.json({status:'success', message:'If email is exist then we will send password reset pin in a while!'});
     }
-    res.json({status:'error', message:'If email is exist then we will send password reset pin in a while!'});
+    res.json({status:'error', message:'Must be registered or valid email!'});
 });
 
+//update password in db
 router.patch('/reset-password', updatepassValidation, async(req,res)=>{
     const {email, pin, newpassword} = req.body;
 

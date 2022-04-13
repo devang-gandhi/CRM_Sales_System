@@ -29,7 +29,7 @@ POST http://localhost:3001/user/reset-password
 Content-Type: application/json
 
 {
-    "email":"def@email.com"
+    "email":"ob@email.com"
 }
 
 ###update new password in db
