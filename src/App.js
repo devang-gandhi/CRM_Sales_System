@@ -9,6 +9,7 @@ import { Recordlist } from './pages/record-listing/recordlist.page';
 import { Record } from './pages/record/record.page';
 import { Registration } from './pages/registration/registration';
 import { Verification } from './pages/verification/verification';
+import { PasswordReset } from './pages/passwordReset/passwordReset';
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
                 <Route path='/' element={<Entry/>}exact/>
                 <Route path='/registration' element={<Registration/>}/>
                 <Route path='/verification/:id/:email' element={<Verification/>}/>
+                <Route path='/password-reset' element={<PasswordReset/>}/>
                 <Route path='/addrecord' element={<Defaultlayout><Addrecord/></Defaultlayout>} /> 
                 <Route path='/recordlist' element={<Defaultlayout><Recordlist/></Defaultlayout>}/>
                 <Route path='/record/:rId' element={<Defaultlayout><Record/></Defaultlayout>}/>      

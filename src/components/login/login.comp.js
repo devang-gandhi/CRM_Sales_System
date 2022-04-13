@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, { useState} from 'react'
 import PropTypes  from 'prop-types'
 import {Container, Row, Col, Form, Button, Spinner, Alert} from 'react-bootstrap'
 import './login.css'
@@ -12,14 +12,14 @@ export const LoginForm = ({ frmswitch}) => {
 
     const dispatch = useDispatch();
     const redirect = useNavigate();
-    const {isLoading, isAuth, error} = useSelector(state=> state.login);
+    const {isLoading, error} = useSelector(state=> state.login);
 
     // useEffect(()=>{
     //   sessionStorage.getItem('accessJWT') && redirect('/dashboard')
     // },[redirect]);
 
-    const [email, setemail] = useState('def@email.com')
-    const [password, setpassword] = useState('password12')
+    const [email, setemail] = useState('')
+    const [password, setpassword] = useState('')
   
     const handleon = e =>{
       const {name, value} = e.target
@@ -85,7 +85,7 @@ export const LoginForm = ({ frmswitch}) => {
 
         <Row>
             <Col>
-                <a href="#!" onClick={() =>frmswitch('reset')} >Forgot Password?</a>
+                <a href="/password-reset">Forgot Password?</a>
             </Col>
         </Row>
 

@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import {Container, Row, Col, Button, Spinner, Alert} from 'react-bootstrap'
 import Breadcrum from '../../components/breadcrum/breadcrum.comp'
 import { Conversation } from '../../components/conversation/conversation.comp';
 import { Updaterecord } from '../../components/update-record/updaterecord.comp';
-import {useParams, Link} from 'react-router-dom'
+import {useParams} from 'react-router-dom'
 import { closeRecord, fetchSingleRecord } from '../record-listing/recordAction';
 import { useDispatch, useSelector } from 'react-redux';
 import { resetMsg } from '../record-listing/recordSlice';
