@@ -1,4 +1,3 @@
-const { reject } = require("bcrypt/promises");
 const { records } = require("./recordSchema");
 
 const insertRecord = recordObj =>{
@@ -18,7 +17,7 @@ const getRecords = userid =>{
     
     return new Promise((resolve, reject)=>{
         try {
-            records.find({userid}) 
+            records.find({clientid: userid}) 
             .then(data=>resolve(data))
             .catch(error => reject(error))
         } catch (error) {

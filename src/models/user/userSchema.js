@@ -4,7 +4,7 @@ const schema = mongoose.Schema;
 const userSchema = new schema({
     name:{
         type:String,
-        maxlength:10,
+        maxlength:50,
         required:true
     },
     company:{
@@ -28,7 +28,7 @@ const userSchema = new schema({
     password:{
         type:String,
         minlength:8,
-        maxlength:100,
+        maxlength:500,
         required:true
     },
     accessJWT:{
@@ -54,7 +54,12 @@ const userSchema = new schema({
             required: true,
             default: Date.now()
         }
-    }
+    },
+    isVerified:{
+        type: Boolean,
+        required: true,
+        default: false,
+    },
 });
 
 module.exports = {

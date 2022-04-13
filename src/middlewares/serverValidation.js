@@ -2,7 +2,7 @@ const Joi = require('joi');
 
 const email= Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } });
 const pin= Joi.number().min(100000).max(999999).required();
-const newpassword = Joi.string().alphanum().min(3).max(30).required();
+const newpassword = Joi.string().min(8).max(30).required();
 const enquiryno = Joi.number().min(10).max(9999999999).required();
 const customername = Joi.string().min(2).required();
 const enquiry = Joi.string().max(20).required();
@@ -63,9 +63,29 @@ const updateMessageValidation = (req,res,next)=>{
     next();
 }
 
+const newUserValidation = (req,res,next)=>{
+    const schema = Joi.object({
+        name : Joi.string().min(2).max(50).required(), 
+        company: Joi.string().min(2).max(50).required(), 
+        address: Joi.string().min(2).max(50).required(), 
+        phone: Joi.number().min(1000000000).max(9999999999).required(), 
+        email: email, 
+        password: Joi.string().min(8).max(30).required(),
+        cpassword: Joi.string().min(8).max(30).required(),
+    });
+    const value = schema.validate(req.body);
+    if(value.error){
+        console.log(value.error);
+        return res.json({status:'error', message: value.error.message});
+    }
+    console.log('fire!');
+    next();
+}
+
 module.exports={
     resetpasspin,
     updatepassValidation,
     createRecordValidation,
-    updateMessageValidation
+    updateMessageValidation,
+    newUserValidation,
 }

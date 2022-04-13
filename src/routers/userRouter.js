@@ -1,13 +1,13 @@
 const express= require('express');
 const router = express.Router();
-const {insertUser, getuser, getUserById, updatePassword, storeAccessJWT, storeRefreshJWT} = require('../models/user/userModel')
+const {insertUser, getuser, getUserById, updatePassword, storeAccessJWT, storeRefreshJWT, verifyUser} = require('../models/user/userModel')
 const {users} = require('../models/user/userSchema')
 const{hashPassword, comparePassword} = require('../helper/bcrypt');
 const { createJWT, refreshJWT } = require('../helper/jsonwebtoken');
 const { authorization } = require('../middlewares/authorization');
 const { setpassresetpin, pinbymailpin, deletepin } = require('../models/resetpassword/resetpassModel');
 const { mailProcessor } = require('../helper/nodemailer');
-const { resetpasspin, updatepassValidation } = require('../middlewares/serverValidation');
+const { resetpasspin, updatepassValidation, newUserValidation } = require('../middlewares/serverValidation');
 
 router.all('/', (req,res,next) =>{ 
     //  res.json({message:'user router'})
@@ -28,8 +28,24 @@ router.get('/', authorization, async (req,res)=>{
     }});
 });
 
+//verify new user
+router.patch('/verify', async(req,res)=>{
+    try {
+        const {id, email} = req.body;
+        const result = await verifyUser(id, email);
+        if( result && result._id){
+            return res.json({status: 'success', message:'Your account has been verified, you can login now!'});
+        }
+
+        return res.json({status: 'error', message:'Something went wrong!'});
+    } catch (error) {
+        console.log(error);
+        return res.json({status: 'error', message:'Invaild request!'});
+    }
+});
+
 //new user router
-router.post('/', async (req,res)=> {
+router.post('/', newUserValidation, async (req,res)=> {
 
     const{name, company, address, phone, email, password} = req.body;
 
@@ -37,7 +53,7 @@ router.post('/', async (req,res)=> {
     try {
 
         const checkemail = await users.findOne({email:req.body.email});
-        if(checkemail) return res.status(400).send('Email is already in database!');
+        if(checkemail) return res.json({status: 'error',message: 'Email is already in database!'});
 
         //hashing
         const hashpass = await hashPassword(password)
@@ -53,10 +69,22 @@ router.post('/', async (req,res)=> {
 
         const result = await insertUser(newuserobj);
         console.log(result);
-        res.json({message:'New user created!', result})
+
+        await mailProcessor({
+            email,
+            type: 'new-user-confirmation',
+            verificationLink: 'http://localhost:3000/verification/' + result._id + '/' + email,
+        });
+
+        res.json({status:'success', message:'New user created!', result})
     } catch (error) {
         console.log(error);
-        res.json({status:'error',message: error.message});
+        // let message = 'Unable to create user, Please try again or contact Adminstration!';
+
+        // if(error.message.includes('duplicate key error collection')){
+        //     message = 'This email has been already registered!';
+        // }
+        res.json({status:'error',message:error.message});
     }
 });
 
@@ -70,6 +98,10 @@ router.post('/login', async(req,res)=>{
 
     const user = await getuser(email);
     const passfrmdb = user && user._id ? user.password: null;
+
+    if(!user.isVerified){
+        return res.json({status: 'error', message: "You haven't verified you account make sure to verify before logging in!"});
+    }
 
     if(!passfrmdb)
         return res.json({status: 'error', message: 'Invaild credentials:('});

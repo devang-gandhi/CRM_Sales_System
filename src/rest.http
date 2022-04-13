@@ -16,8 +16,8 @@ POST http://localhost:3001/user/login
 Content-Type: application/json
 
 {
-    "email":"def@email.com",
-    "password":"password12"
+    "email":"xyz@email.com",
+    "password":"Salty-2000"
 } 
 
 ###get user profile

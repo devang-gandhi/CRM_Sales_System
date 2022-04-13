@@ -28,7 +28,7 @@ const send = (info)=>{
 }
 
 
-const mailProcessor = ({email, pin, type})=>{
+const mailProcessor = ({email, pin, type, verificationLink=''})=>{
     let info = '';
     switch (type) {
         case 'request-new-pass':
@@ -55,10 +55,22 @@ const mailProcessor = ({email, pin, type})=>{
                        <p>Your new password has been updated!</p>`, // html body
             }
             send(info);
+        
+        case 'new-user-confirmation':
+            info = {
+                from: '"CRM Head Admin👻" <joanny.senger14@ethereal.email>', // sender address
+                to: email, // list of receivers
+                subject: "Please verify your email!", // Subject line
+                text: "Please open the link to verify your account!", // plain text body
+                html: `<b>Hello</b>
+                        <p>Please open the link to verify your account!</p>
+                        <p>${verificationLink}</p>
+                        `, // html body
+            }
+            send(info);
         default:
             break;
     }
-
 }
 
 module.exports={

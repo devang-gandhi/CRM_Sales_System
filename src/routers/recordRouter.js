@@ -41,7 +41,6 @@ router.post('/', createRecordValidation, authorization , async(req,res)=>{
 router.get('/', authorization , async(req,res)=>{
     try {
         const uid = req.userID;
-
         const result = await getRecords(uid);
         console.log(result);
         return res.json({status:'success', result});
