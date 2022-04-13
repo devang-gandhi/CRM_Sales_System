@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { Col, Container, Row, Form, Button } from 'react-bootstrap'
+import { Col, Container, Row, Form, Button, Spinner, Alert } from 'react-bootstrap'
+import { useDispatch, useSelector } from 'react-redux'
+import {newUserRegistration} from './userRegAction';
 
 const initialState ={
     name:'',
     email:'',
-    companyname:'',
+    company:'',
     address:'',
     phone:'',
     password:'',
@@ -22,8 +24,10 @@ const passValidation={
 
 const RegistrationForm = () => {
 
+    const dispatch = useDispatch();
     const [user, setuser] = useState(initialState);
     const [passError, setpassError] = useState(passValidation);
+    const {isLoading, status, message} = useSelector(state=> state.registration);
 
     useEffect(()=>{},[user]);
 
@@ -49,6 +53,7 @@ const RegistrationForm = () => {
     const onsubmit=(e)=>{
         e.preventDefault();
         console.log(user);
+        dispatch(newUserRegistration(user));
     }
 
   return (
@@ -59,6 +64,11 @@ const RegistrationForm = () => {
             </Col>
         </Row>
         <hr />
+        <Row>
+            <Col>
+               {message && <Alert variant={status === 'success' ? 'success' : 'danger'}>{message}</Alert>} 
+            </Col>
+        </Row>
         <Row>
             <Col>
                 <Form onSubmit={onsubmit}>
@@ -74,7 +84,7 @@ const RegistrationForm = () => {
 
                     <Form.Group className="mb-3">
                         <Form.Label><b>Company Name</b></Form.Label>
-                        <Form.Control type="text" name='companyname' value={user.companyname} onChange={onchange} placeholder="Company Name" />
+                        <Form.Control type="text" name='company' value={user.companyname} onChange={onchange} placeholder="Company Name" />
                     </Form.Group>
 
                     <Form.Group className="mb-3">
@@ -112,6 +122,7 @@ const RegistrationForm = () => {
                     <Button variant="primary" type="submit" disabled={Object.values(passError).includes(false)}>
                         Register
                     </Button>
+                    {isLoading && <Spinner variant='info' animation='border'/>}
                 </Form>
             </Col>
         </Row>

@@ -8,6 +8,7 @@ import { Addrecord } from './pages/new-record/addrecord.page';
 import { Recordlist } from './pages/record-listing/recordlist.page';
 import { Record } from './pages/record/record.page';
 import { Registration } from './pages/registration/registration';
+import { Verification } from './pages/verification/verification';
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <Routes>
                 <Route path='/' element={<Entry/>}exact/>
                 <Route path='/registration' element={<Registration/>}/>
+                <Route path='/verification/:id/:email' element={<Verification/>}/>
                 <Route path='/addrecord' element={<Defaultlayout><Addrecord/></Defaultlayout>} /> 
                 <Route path='/recordlist' element={<Defaultlayout><Recordlist/></Defaultlayout>}/>
                 <Route path='/record/:rId' element={<Defaultlayout><Record/></Defaultlayout>}/>      

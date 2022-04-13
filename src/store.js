@@ -3,6 +3,7 @@ import recordsReducer from './pages/record-listing/recordSlice'
 import loginReducer from './components/login/loginSlice'
 import userReducer from './pages/dashboard/userSlice'
 import newRecordReducer from './components/addrecord-form/addRecordSlicer'
+import registrationReducer from './components/registration/registrationSlice'
 
 const store = configureStore({
     reducer:{
@@ -10,6 +11,7 @@ const store = configureStore({
         login : loginReducer,
         user: userReducer,
         openRecord: newRecordReducer,
+        registration: registrationReducer,
     },
 })
 
