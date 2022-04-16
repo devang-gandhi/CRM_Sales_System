@@ -135,7 +135,7 @@ router.patch('/reset-password', updatepassValidation, async(req,res)=>{
     const {email, pin, newpassword} = req.body;
 
     const getpin = await pinbymailpin(email, pin)
-    if(getpin._id){
+    if(getpin?._id){
         const DBdate = getpin.addedAt;
         const exp = 1;
         let expdate = DBdate.setDate(DBdate.getDate() + exp);
